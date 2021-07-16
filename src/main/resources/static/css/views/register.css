@@ -44,8 +44,8 @@ nav {
 	padding: 0rem;
 }
 
-.login-card{
-  height: 338px;
+.register-card{
+  height: 711px;
   width: 371px;
   position: absolute;
   top: 50%;
@@ -57,7 +57,50 @@ nav {
   margin-bottom: 1rem;
 }
 
+#email{
+  margin-bottom: 1rem;
+}
+
+#first-name{
+  margin-bottom: 1rem;
+}
+
+#last-name{
+  margin-bottom: 1rem;
+}
+
 #password{
+  margin-bottom: 1rem;
+}
+
+#address{
+  margin-bottom: 1rem;
+}
+
+.age{
+  margin-bottom: 1rem;
+}
+
+.age-select{
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.day-select{
+  width: 50%;
+}
+
+.month-select{
+  width: 60%;
+}
+
+.year-select{
+  width: 70%;
+}
+
+.radio{
+  display: grid;
+  grid-template-columns: auto auto auto;
   margin-bottom: 1rem;
 }
 
@@ -73,10 +116,53 @@ nav {
   margin-left: 0.5rem;
 }
 
+.email-image{
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+}
+
+.first-name-image{
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+}
+
+.last-name-image{
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+}
+
+.date-image{
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+}
+
+.address-image{
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+}
+
+.gender-image{
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+}
+
 .password-image{
   width: 1rem;
   height: 1rem;
   margin-left: 0.5rem;
+}
+
+.feedback-form{
+  padding-bottom: 8px;
+  padding-left: 16px;
+  padding-top: 8px;
+  padding-right: 16px;
 }
 
 .form-outer{
@@ -114,4 +200,3 @@ nav {
     padding-left: 15px;
     font-size: 18px;
   }
-  

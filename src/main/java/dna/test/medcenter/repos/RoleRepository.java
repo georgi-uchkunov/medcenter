@@ -7,5 +7,7 @@ import dna.test.medcenter.models.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Integer> {
+	
+	Role findByCode(final String code);
 
 }

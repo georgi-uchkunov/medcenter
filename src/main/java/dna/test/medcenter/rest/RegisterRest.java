@@ -32,8 +32,7 @@ public class RegisterRest {
 			@RequestParam(name = "dateOfBirthString") String dateOfBirthString) {
 		LocalDate dateOfBirth = LocalDate.parse(dateOfBirthString);
 		final User newPatient = new User(email, username, password, firstName, lastName, dateOfBirth, gender, address);
-		Role patientRole = new Role();
-		patientRole.setCode("PATIENT");
+		Role patientRole = roleRepository.findByCode("PATIENT");
 		newPatient.addRole(roleRepository.save(patientRole));
 		return userRepository.saveAndFlush(newPatient);
 

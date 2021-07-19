@@ -24,22 +24,39 @@ public class DataGenerator {
 	}
 
 	@PostConstruct
-	public void loadMedicalPhysician() {
+	public void loadExampleUsers() {
 		if (userRepository.count() == 0) {
-			User medPhysician = new User();
-			medPhysician.setFirstName("John");
-			medPhysician.setLastName("Smith");
-			medPhysician.setAddress("Main Street 81");
-			medPhysician.setGender("Male");
-			medPhysician.setDateOfBirth(LocalDate.of(1987, 07, 17));
-			medPhysician.setEmail("doctor01@test.com");
-			medPhysician.setPassword("doctor01");
-			medPhysician.setUsername("doctor01");
-			Role medPhysicianRole = new Role();
-			medPhysicianRole.setCode("MED_PHYS");
-			medPhysician.addRole(roleRepository.save(medPhysicianRole));
-			userRepository.save(medPhysician);
+			loadMedicalPhysician();
+			loadPatients();
 		}
+	}
+
+	public void loadMedicalPhysician() {
+		User medPhysician = new User("doctor01@test.com", "doctor01", "doctor01", "John", "Smith",
+				LocalDate.of(1987, 07, 17), "Male", "Main Street 81");
+		Role medPhysicianRole = new Role();
+		medPhysicianRole.setCode("MED_PHYS");
+		medPhysician.addRole(roleRepository.save(medPhysicianRole));
+		userRepository.save(medPhysician);
+	}
+
+	public void loadPatients() {
+		User examplePatientOne = new User("test1@test.com", "AliceS", "test1", "Alice", "Smith",
+				LocalDate.parse("1983-11-15"), "female", "Main Str 17");
+		User examplePatientTwo = new User("test2@test.com", "BobJ", "test2", "Bob", "Jones",
+				LocalDate.parse("1992-08-07"), "male", "Second Str 89");
+		User examplePatientThree = new User("test3@test.com", "ClarkN", "test3", "Clark", "North",
+				LocalDate.parse("1998-05-16"), "male", "Silver Str 117");
+		Role patientRole = new Role();
+		patientRole.setCode("PATIENT");
+		roleRepository.save(patientRole);
+		examplePatientOne.addRole(patientRole);
+		examplePatientTwo.addRole(patientRole);
+		examplePatientThree.addRole(patientRole);
+		userRepository.save(examplePatientOne);
+		userRepository.save(examplePatientTwo);
+		userRepository.save(examplePatientThree);
+
 	}
 
 }

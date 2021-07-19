@@ -15,7 +15,7 @@ nav {
 	width: 2.3rem;
 	height: 2.3rem;
 	margin-right: 8px;
-  margin-left: 1.8rem;
+    margin-left: 1.8rem;
 }
 
 .navbar-brand{
@@ -29,7 +29,7 @@ nav {
 
 .nav-link {
 	padding-left: 10rem;
-  font-size: large;
+    font-size: large;
 }
 
 #logo {
@@ -42,4 +42,34 @@ nav {
 	background: url("../../images/stetoscope.jpg");
 	background-size: cover;
 	padding: 0rem;
+}
+
+.upper-row{
+	display: grid;
+	grid-template-columns: 21rem auto auto;
+	padding-top: 2rem;
+}
+
+#search-bar{
+	border-radius: 5px 0px 0px 5px;
+	width: 20rem;
+	margin-left: 1rem;
+	margin-right: 0px;
+}
+
+#search-button{
+	width: 1rem;
+	border-radius: 0px 5px 0px 5px;
+	align-items: center;
+}
+
+.search-image{
+	width: 1.7rem;
+	height: 1.7rem;
+	transform: translate(-39%, 0);
+}
+
+#do-test{
+	width: 19%;
+	transform: translate(383%, 0);
 }

@@ -19,7 +19,7 @@ nav {
 }
 
 .navbar-brand{
-  margin-right: 91rem;
+  margin-right: 87rem;
 }
 
 .nav-links {
@@ -59,8 +59,9 @@ nav {
 }
 
 .list-group-item{
-	background: #378dfc;
+	background: #d9e3f1;
 	width: 71%;
+	border-radius: 15px;
 }
 
 .test-info-div{

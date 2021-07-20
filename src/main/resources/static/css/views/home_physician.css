@@ -19,7 +19,7 @@ nav {
 }
 
 .navbar-brand{
-  margin-right: 91rem;
+  margin-right: 87rem;
 }
 
 .nav-links {
@@ -72,4 +72,87 @@ nav {
 #do-test{
 	width: 19%;
 	transform: translate(383%, 0);
+}
+
+#test-list{
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+	grid-gap: 1rem;
+	border-radius: 15px 15px 15px 15px;
+	padding-top: 2rem;
+}
+
+.framing-div{
+	display: grid;
+	grid-template-columns: 10rem 5rem;
+	align-items: center;
+}
+
+.list-group-item{
+	background: #d9e3f1;
+	width: 71%;
+	border-radius: 15px;
+}
+
+.test-info-div{
+	transform: translate(17%, 6%);
+}
+
+.test-image{
+	width: 7rem;
+	height: 7rem;
+	transform: translate(23%, 0%);
+}
+
+.buttons-div{
+	display: grid;
+	grid-template-columns: auto auto;
+	margin-top: 1rem;
+}
+
+#more-info-button{
+	width: 90%;
+	height: 90%
+}
+
+#redo-test{
+	width: 90%;
+	height: 90%;
+}
+
+.modal-content{
+	border-radius: 15px;
+}
+
+.modal-body{
+	background: #d9e3f1;
+	border-radius: 0 0 15px 15px;
+}
+
+.modal-header{
+	background: #d9e3f1;
+	border-radius: 15px 15px 0 0;
+}
+
+.alert-text{
+	font-size: large;
+}
+
+.text-row{
+	display: flex;
+    justify-content: center;
+	margin-bottom: 1rem;
+}
+
+#decline-redo{
+	margin-right: 1.8rem;
+}
+
+#agree-redo{
+	margin-right: 1rem;
+}
+
+.buttons-row{
+	display: flex;
+    justify-content: flex-end;
 }

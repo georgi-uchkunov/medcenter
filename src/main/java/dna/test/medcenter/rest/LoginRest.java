@@ -59,5 +59,12 @@ public class LoginRest {
 			return "/";
 		}
 	}
+	
+	@GetMapping(value = "/getCurrentUsername")
+	public String getCurrentUsername(HttpSession session) {
+		final User currentUser = (User) session.getAttribute("currentUser");
+		String username = currentUser.getUsername();
+		return username;
+	}
 
 }

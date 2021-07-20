@@ -15,7 +15,10 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties("medicalTests")
 public class Patient implements Serializable {
 
 	private static final long serialVersionUID = 2L;
@@ -124,6 +127,37 @@ public class Patient implements Serializable {
 
 	public void setMedicalTests(List<MedTest> medicalTests) {
 		this.medicalTests = medicalTests;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((patientName == null) ? 0 : patientName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Patient other = (Patient) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (patientName == null) {
+			if (other.patientName != null)
+				return false;
+		} else if (!patientName.equals(other.patientName))
+			return false;
+		return true;
 	}
 	
 }

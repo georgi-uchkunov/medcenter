@@ -43,3 +43,32 @@ nav {
 	background-size: cover;
 	padding: 0rem;
 }
+
+#test-list{
+	display: grid;
+	grid-template-columns: auto auto auto auto auto;
+	grid-gap: 1rem;
+	border-radius: 15px 15px 15px 15px;
+	padding-top: 2rem;
+}
+
+.framing-div{
+	display: grid;
+	grid-template-columns: 10rem 5rem;
+	align-items: center;
+}
+
+.list-group-item{
+	background: #378dfc;
+	width: 71%;
+}
+
+.test-info-div{
+	transform: translate(17%, 6%);
+}
+
+.test-image{
+	width: 7rem;
+	height: 7rem;
+	transform: translate(23%, 0%);
+}

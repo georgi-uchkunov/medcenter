@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import dna.test.medcenter.models.MedTest;
 import dna.test.medcenter.models.Patient;
 import dna.test.medcenter.models.Role;
 import dna.test.medcenter.models.User;
@@ -37,6 +38,7 @@ public class DataGenerator {
 			loadMedicalPhysician();
 			loadUsersWithPatientRole();
 			loadPatients();
+			loadMedTests();
 		}
 	}
 
@@ -78,6 +80,28 @@ public class DataGenerator {
 		patientRepository.save(examplePatientA);
 		patientRepository.save(examplePatientB);
 		patientRepository.save(examplePatientC);
+	}
+
+	public void loadMedTests() {
+		MedTest exampleTestOne = new MedTest(LocalDate.of(2021, 06, 21), 1, "Blurred vision");
+		exampleTestOne.setPatient(patientRepository.findByPatientNameAndEmail("Alice Smith", "test1@test.com"));
+		MedTest exampleTestTwo = new MedTest(LocalDate.of(2021, 07, 01), 1, "Loss of hearing");
+		exampleTestTwo.setPatient(patientRepository.findByPatientNameAndEmail("Alice Smith", "test1@test.com"));
+		MedTest exampleTestThree = new MedTest(LocalDate.of(2021, 05, 10), 0.75, "Constant sneezing");
+		exampleTestThree.setPatient(patientRepository.findByPatientNameAndEmail("Bob Jones", "test2@test.com"));
+		MedTest exampleTestFour = new MedTest(LocalDate.of(2021, 07, 17), 0.75, "Rapid hiccups");
+		exampleTestFour.setPatient(patientRepository.findByPatientNameAndEmail("Bob Jones", "test2@test.com"));
+		MedTest exampleTestFive = new MedTest(LocalDate.of(2021, 05, 18), 0, "Insomnia");
+		exampleTestFive.setPatient(patientRepository.findByPatientNameAndEmail("Clark North", "test3@test.com"));
+		MedTest exampleTestSix = new MedTest(LocalDate.of(2021, 07, 03), 0, "Narcolepsy");
+		exampleTestSix.setPatient(patientRepository.findByPatientNameAndEmail("Clark North", "test3@test.com"));
+		testRepository.save(exampleTestOne);
+		testRepository.save(exampleTestTwo);
+		testRepository.save(exampleTestThree);
+		testRepository.save(exampleTestFour);
+		testRepository.save(exampleTestFive);
+		testRepository.save(exampleTestSix);
+
 	}
 
 }

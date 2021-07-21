@@ -106,6 +106,37 @@ $(function() {
 					}, 110);
 				}
 			});
+	
+	$("#search-button").on("click", function() {
+
+		var searchTerm = $("#search-bar").val();
+
+		$.ajax({
+			method : "GET",
+			url : "getSpecificTests",
+			data : {
+				
+				searchTerm : searchTerm
+			}
+		}).done(function(response) {
+			var $testList = $("#test-list");
+			$testList.empty();
+			for (var i = 0; i < response.length; i++) {
+				var currentMedTest = response[i];
+				renderMedTest(currentMedTest.id,
+						currentMedTest.testDate,
+						currentMedTest.patient.patientName,
+						currentMedTest.testResult,
+						currentMedTest.patient.phoneNumber,
+						currentMedTest.patient.dna,
+						currentMedTest.patient.email,
+						currentMedTest.patient.dateOfBirth,
+						currentMedTest.patient.gender,
+						currentMedTest.patient.address,
+						currentMedTest.symptom);
+			}
+		});
+	})
 
 	var getUsername = function() {
 		$.ajax({

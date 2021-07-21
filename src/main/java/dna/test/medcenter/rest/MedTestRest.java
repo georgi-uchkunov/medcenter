@@ -72,5 +72,24 @@ public class MedTestRest {
 		return ResponseEntity.ok(medTests);
 		
 	}
+	
+	@GetMapping("/getSpecificTests")
+	public ResponseEntity<List<MedTest>> getSpecificTests(String searchTerm){
+		final List<MedTest> specificTests = new ArrayList<>();
+		final List<MedTest> allTests = testRepository.findAll();
+		for(int i = 0; i < allTests.size(); i++) {
+			MedTest currentTest = allTests.get(i);
+			String[] nameParts = currentTest.getPatient().getPatientName().split(" ");
+			String firstName = nameParts[0];
+			String lastName = nameParts[1];
+			if(searchTerm.equalsIgnoreCase(currentTest.getPatient().getPatientName()) || searchTerm.equalsIgnoreCase(currentTest.getPatient().getPhoneNumber()) 
+					|| currentTest.getPatient().getPatientName().contains(searchTerm) || currentTest.getPatient().getPhoneNumber().contains(searchTerm)
+					|| searchTerm.equalsIgnoreCase(firstName) || searchTerm.equalsIgnoreCase(lastName)) {
+				specificTests.add(currentTest);
+			}
+		}
+		
+		return ResponseEntity.ok(specificTests);
+	}
 
 }

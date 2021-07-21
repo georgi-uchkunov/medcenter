@@ -79,17 +79,29 @@
 							<p class="phone-number"></p>
 							<label for="test-result">Test result:</label>
 							<p class="test-result"></p>
+							<label for="symptom" class="symptom-label">Symptom:</label>
+							<p class="symptom"></p>
 						</div>
 						<div class="test-image-div">
 							<img class="test-image" src="../images/helix.svg"
 								alt="test-image">
 						</div>
+						<div class="more-info-div">
+							<label for="patient-email">Email:</label>
+							<p class="patient-email"></p>
+							<label for="dna">DNA:</label>
+							<p class="dna"></p>
+							<label for="date-of-birth">Date of birth:</label>
+							<p class="date-of-birth"></p>
+							<label for="gender">Gender:</label>
+							<p class="gender"></p>
+							<label for="address">Address:</label>
+							<p class="address"></p>
+						</div>
 					</div>
 					<div class="buttons-div">
-						<button type="button" class="btn btn-outline-primary"
-							id="more-info-button">More info</button>
-						<button type="button" class="btn btn-outline-primary"
-							id="redo-test" data-toggle="modal" data-target="#redo-test-modal">Redo
+						<button type="button" class="btn redo-test btn-outline-primary"
+							data-toggle="modal" data-target="#redo-test-modal">Redo
 							test</button>
 					</div>
 
@@ -103,7 +115,7 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
+						<button type="button" class="btn-close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true"></span>
 						</button>

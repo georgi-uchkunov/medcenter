@@ -172,3 +172,303 @@ nav {
 	display: flex;
     justify-content: flex-end;
 }
+
+.modal-content{
+	background: white;
+	color: #1a1a1a;
+	text-align: justify;
+  }
+  
+  .modal-body{
+	height: 25.5rem;
+  }
+  
+  .first-next-field .firstNext{
+	margin-left: 380px;
+	padding-top: 3%;
+  }
+
+  .first-prev{
+	padding-top: 3%;
+  }
+  
+  .second-next{
+	margin-left: 263px;
+	padding-top: 3%;
+  }
+  
+  .second-set-btns{
+	margin-top: 35px;
+  }
+  
+  .service-select{
+	margin-bottom: 1rem;
+  }
+
+  .second-prev{
+	padding-top: 3%;
+  }
+  
+  .third-next{
+	margin-left: 263px;
+	padding-top: 3%;
+  }
+  
+  .btns-three{
+	transform: translate(0%, -45%);
+  }
+  
+  #first-name{
+	margin-bottom: 1rem;
+  }
+
+  .first-name-image{
+	width: 1rem;
+	height: 1rem;
+	margin-left: 0.5rem;
+  }
+  
+  .last-name-image{
+	width: 1rem;
+	height: 1rem;
+	margin-left: 0.5rem;
+  }
+  
+  #email{
+	margin-bottom: 1rem;
+  }
+
+  .email-image{
+	width: 1rem;
+	height: 1rem;
+	margin-left: 0.5rem;
+  }
+
+  .phone-image{
+	width: 1rem;
+	height: 1rem;
+	margin-left: 0.5rem;
+  }
+  
+  #name-card{
+	margin-bottom: 1rem;
+  }
+  
+  #submit-button{
+	margin-left: 250px;
+  }
+  
+  #country-code{
+	height: calc(1.5em + 1.5rem);
+	width: 4.7rem;
+	height: 56px;
+  }
+  
+  .reservation-phone{
+	display: grid;
+	grid-template-columns: 4.7rem 23rem;
+	grid-gap: 1rem;
+  }
+
+  .age{
+	margin-bottom: 1rem;
+  }
+  
+  .age-select{
+	display: grid;
+	grid-template-columns: auto auto auto;
+  }
+  
+  .day-select{
+	width: 60%;
+  }
+  
+  .month-select{
+	width: 70%;
+  }
+  
+  .year-select{
+	width: 80%;
+  }
+  
+  .radio{
+	display: grid;
+	grid-template-columns: auto auto auto;
+	margin-bottom: 1rem;
+  }
+
+  #address{
+	margin-bottom: 1rem;
+  }
+
+  #dna{
+	margin-bottom: 1rem;
+  }
+
+  .date-image{
+	width: 1rem;
+	height: 1rem;
+	margin-left: 0.5rem;
+  }
+
+  .address-image{
+	width: 1rem;
+	height: 1rem;
+	margin-left: 0.5rem;
+  }
+
+  .gender-image{
+	width: 1rem;
+	height: 1rem;
+	margin-left: 0.5rem;
+  }
+
+  .dna-image{
+	width: 1rem;
+	height: 1rem;
+	margin-left: 0.5rem;  
+  }
+
+  .symptom-image{
+	width: 1rem;
+	height: 1rem;
+	margin-left: 0.5rem;
+  }
+
+  .third-prev{
+	padding-top: 3%;
+  }
+
+  .submit{
+	padding-top: 3%;
+  }
+    
+  .form-outer{
+	  width: 100%;
+	  overflow: hidden;
+	}
+   .form-outer form{
+	  display: flex;
+	  width: 400%;
+	}
+	.form-outer form .page{
+	  width: 25%;
+	  transition: margin-left 0.3s ease-in-out;
+	}
+	.form-outer form .page .title{
+	  text-align: left;
+	  font-size: 25px;
+	  font-weight: 500;
+	}
+	.form-outer form .page .field{
+	  width: 330px;
+	  height: 45px;
+	  margin: 45px 0;
+	  display: flex;
+	  position: relative;
+	}
+	form .page .field .label{
+	  position: absolute;
+	  top: -30px;
+	  font-weight: 500;
+	}
+	form .page .field input{
+	  height: 100%;
+	  width: 100%;
+	  border: 1px solid #1a1a1a;
+	  border-radius: 5px;
+	  padding-left: 15px;
+	  font-size: 18px;
+	}
+	form .page .field select{
+	  width: 100%;
+	  padding-left: 10px;
+	  font-size: 17px;
+	  font-weight: 500;
+	}
+  
+	.progress-bar{
+	  display: grid;
+	  grid-template-columns: 5rem 5rem 5rem 5rem;
+	  user-select: none;
+	  background: #d9e3f1;
+	  color: #1a1a1a;
+	  box-shadow: none;
+	  margin-bottom: 2rem;
+	}
+	.progress-bar .step{
+	  text-align: center;
+	  width: 100%;
+	  position: relative;
+	}
+	.progress-bar .step p{
+	  font-weight: 500;
+	  font-size: 18px;
+	  color: #1a1a1a;
+	  margin-bottom: 8px;
+	}
+	.progress-bar .step .bullet{
+	  height: 25px;
+	  width: 25px;
+	  border: 2px solid #1a1a1a;
+	  display: inline-block;
+	  border-radius: 50%;
+	  position: relative;
+	  transition: 0.2s;
+	  font-weight: 500;
+	  font-size: 17px;
+	  line-height: 25px;
+	}
+	.progress-bar .step .bullet.active{
+	  border-color: #1a1a1a;
+	  background: #1a1a1a;
+	}
+	.progress-bar .step .bullet span{
+	  position: absolute;
+	  left: 50%;
+	  transform: translateX(-50%);
+	}
+	.progress-bar .step .bullet.active span{
+	  display: none;
+	}
+	.progress-bar .step .bullet:before,
+	.progress-bar .step .bullet:after{
+	  position: absolute;
+	  content: '';
+	  bottom: 11px;
+	  right: -51px;
+	  height: 3px;
+	  width: 44px;
+	  background: #1a1a1a;
+	}
+	.progress-bar .step .bullet.active:after{
+	  background: #1a1a1a;
+	  transform: scaleX(0);
+	  transform-origin: left;
+	  animation: animate 0.3s linear forwards;
+	}
+	@keyframes animate {
+	  100%{
+		transform: scaleX(1);
+	  }
+	}
+	.progress-bar .step:last-child .bullet:before,
+	.progress-bar .step:last-child .bullet:after{
+	  display: none;
+	}
+	.progress-bar .step p.active{
+	  color: #1a1a1a;
+	  transition: 0.2s linear;
+	}
+	.progress-bar .step .check{
+	  position: absolute;
+	  left: 50%;
+	  top: 70%;
+	  font-size: 15px;
+	  transform: translate(-50%, -50%);
+	  display: none;
+	}
+	.progress-bar .step .check.active{
+	  display: block;
+	  color: #1a1a1a;
+	}

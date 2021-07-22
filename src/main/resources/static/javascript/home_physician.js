@@ -138,6 +138,56 @@ $(function() {
 		});
 	})
 
+	$("#submit-button").on("click", function() {
+
+		var firstName = $("#first-name").val();
+		var lastName = $("#last-name").val();
+		var patientName = firstName + " " + lastName;
+		var email = $("#email").val();
+		var countryCode = $("#country-code").val();
+		var phoneNumber = $("#phone-number").val();
+		var patientPhoneNumber = countryCode + phoneNumber;
+		var day = $("#day").val();
+        var month = $("#month").val();
+        var year = $("#year").val();
+        var dateOfBirthString = year + "-" + month + "-" + day;
+        var address = $("#address").val();
+        
+        var radios = document.getElementsByName("gender-radio");
+        
+        for(var i = 0; i < radios.length; i++) {
+        	if(radios[i].checked){
+        		if(i == 0){
+        			var gender = $("#male-radio").val();
+        		} else if(i == 1){
+        			var gender = $("#female-radio").val();
+        		} else if(i == 2){
+        			var gender = $("#other-radio").val();
+        		}
+        	}
+        }
+
+		var dna = $("#dna").val();
+		var symptom = $("#symptom").val();
+
+		$.ajax({
+			method : "POST",
+			url : "performDNATest",
+			data : {
+				patientName : patientName,
+				email : email,
+				phoneNumber : patientPhoneNumber,
+				dateOfBirthString : dateOfBirthString,
+				address : address,
+				gender : gender,
+				dna : dna,
+				symptom : symptom
+			}
+		}).done(function(response) {
+			console.log(response);
+		});
+	})
+
 	var getUsername = function() {
 		$.ajax({
 			method : "GET",

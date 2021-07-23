@@ -136,6 +136,10 @@ nav {
 	margin-right: 1rem;
 }
 
+#redo-test-modal .modal-content{
+	height: 10rem;
+}
+
 .modal-content{
 	border-radius: 15px;
 }

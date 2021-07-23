@@ -47,14 +47,36 @@ $(function() {
 		$testsList.append($template);
 	}
 	
+	$(document).on('click', '.redo-test', function() {
+		$selectedTest = $(this).closest('.list-group-item');
+		var testId = $selectedTest.find('.redo-test').attr('id');
+		$('#testIdPassModal').find('#testId').text(testId);
+	})
+	
+	$("#agree-redo").on("click", function() {
+
+		var testId = $("#testId").text();
+		$.ajax({
+			method : "POST",
+			url : "redoDNATest",
+			data : {
+				testId: testId
+			}
+		}).done(function(response) {
+			$("#redo-test-modal").modal("hide");
+			var $testList = $("#test-list");
+			$testList.empty();
+			getAllUserTests();
+		});
+	})
+	
 	$(document).on(
 			'click',
-			'.list-group-item',
+			'.list-group-item:not([type = button])',
 			function() {
 				$selectedTest = $(this).closest(
 						'.list-group-template-test');
 				$trueSelectedTest = $selectedTest.prevObject;
-				console.log($trueSelectedTest);
 				var display = $trueSelectedTest.find('.more-info-div').css(
 						'display');
 				if (display == 'block') {
@@ -146,7 +168,7 @@ $(function() {
 		var email = $("#email").val();
 		var countryCode = $("#country-code").val();
 		var phoneNumber = $("#phone-number").val();
-		var patientPhoneNumber = countryCode + phoneNumber;
+		var patientPhoneNumber = countryCode + " " + phoneNumber;
 		var day = $("#day").val();
         var month = $("#month").val();
         var year = $("#year").val();

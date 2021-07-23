@@ -3,6 +3,7 @@ package dna.test.medcenter.rest;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -187,8 +188,8 @@ public class MedTestRest {
 		 * Compare the String to the DNA String and cut off characters from the end
 		 * until a genuine prefix match
 		 */
-		for(int i = 0; i < 255; i++) {
-			if(!reversedDna.contains(prefixArrayListString)) {
+		for (int i = 0; i < 255; i++) {
+			if (!reversedDna.contains(prefixArrayListString)) {
 				prefixArrayListString = StringUtils.chop(prefixArrayListString);
 			} else {
 				break;
@@ -216,6 +217,23 @@ public class MedTestRest {
 			prefixArrayListString = prefixArrayListString + currentChar;
 		}
 		return prefixArrayListString;
+
+	}
+
+	@PostMapping(value = "/redoDNATest")
+	public MedTest redoDnaTest(@RequestParam(name = "testId") int testId) {
+		Optional<MedTest> testForRedo = testRepository.findById(testId);
+		
+		if(testForRedo.isPresent()) {
+			MedTest requiredMedTest = testForRedo.get();
+			String requiredMedTestDna = requiredMedTest.getPatient().getDna();
+			double newResult = getGeneticDisorderProbability(requiredMedTestDna);
+			requiredMedTest.setTestResult(newResult);
+			requiredMedTest.setTestDate(LocalDate.now());
+			testRepository.saveAndFlush(requiredMedTest);
+		}
+		return null;
+		
 
 	}
 

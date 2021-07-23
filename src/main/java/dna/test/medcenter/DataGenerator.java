@@ -73,9 +73,9 @@ public class DataGenerator {
 	public void loadPatients() {
 		Patient examplePatientA = new Patient("test1@test.com", "ATGCGGTATC", "Alice Smith", "35988 1234567",
 				LocalDate.parse("1983-11-15"), "female", "Main Str 17");
-		Patient examplePatientB = new Patient("test2@test.com", "GTCAGTTA", "Bob Jones", "088 7654321",
+		Patient examplePatientB = new Patient("test2@test.com", "GTCAGTTA", "Bob Jones", "35988 1234568",
 				LocalDate.parse("1992-08-07"), "male", "Second Str 89");
-		Patient examplePatientC = new Patient("test3@test.com", "ACTGACTGA", "Clark North", "088 2143657",
+		Patient examplePatientC = new Patient("test3@test.com", "ACTGACTGA", "Clark North", "35988 1234569",
 				LocalDate.parse("1998-05-16"), "male", "Silver Str 117");
 		patientRepository.save(examplePatientA);
 		patientRepository.save(examplePatientB);
@@ -83,17 +83,17 @@ public class DataGenerator {
 	}
 
 	public void loadMedTests() {
-		MedTest exampleTestOne = new MedTest(LocalDate.of(2021, 06, 21), 0.3, "Blurred vision");
+		MedTest exampleTestOne = new MedTest(LocalDate.of(2021, 06, 21), 10, "Blurred vision");
 		exampleTestOne.setPatient(patientRepository.findByPatientNameAndEmail("Alice Smith", "test1@test.com"));
-		MedTest exampleTestTwo = new MedTest(LocalDate.of(2021, 07, 01), 1, "Loss of hearing");
+		MedTest exampleTestTwo = new MedTest(LocalDate.of(2021, 07, 01), 10, "Loss of hearing");
 		exampleTestTwo.setPatient(patientRepository.findByPatientNameAndEmail("Alice Smith", "test1@test.com"));
-		MedTest exampleTestThree = new MedTest(LocalDate.of(2021, 05, 10), 0.75, "Constant sneezing");
+		MedTest exampleTestThree = new MedTest(LocalDate.of(2021, 05, 10), 10, "Constant sneezing");
 		exampleTestThree.setPatient(patientRepository.findByPatientNameAndEmail("Bob Jones", "test2@test.com"));
-		MedTest exampleTestFour = new MedTest(LocalDate.of(2021, 07, 17), 0.75, "Rapid hiccups");
+		MedTest exampleTestFour = new MedTest(LocalDate.of(2021, 07, 17), 10, "Rapid hiccups");
 		exampleTestFour.setPatient(patientRepository.findByPatientNameAndEmail("Bob Jones", "test2@test.com"));
-		MedTest exampleTestFive = new MedTest(LocalDate.of(2021, 05, 18), 0, "Insomnia");
+		MedTest exampleTestFive = new MedTest(LocalDate.of(2021, 05, 18), 10, "Insomnia");
 		exampleTestFive.setPatient(patientRepository.findByPatientNameAndEmail("Clark North", "test3@test.com"));
-		MedTest exampleTestSix = new MedTest(LocalDate.of(2021, 07, 03), 0, "Narcolepsy");
+		MedTest exampleTestSix = new MedTest(LocalDate.of(2021, 07, 03), 10, "Narcolepsy");
 		exampleTestSix.setPatient(patientRepository.findByPatientNameAndEmail("Clark North", "test3@test.com"));
 		testRepository.save(exampleTestOne);
 		testRepository.save(exampleTestTwo);

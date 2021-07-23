@@ -47,8 +47,10 @@ nav {
 }
 
 .register-card{
-  height: 711px;
+  height: 731px;
   width: 371px;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 50%;
   right: 50%;

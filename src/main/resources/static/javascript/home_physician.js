@@ -161,7 +161,33 @@ $(function() {
 	})
 
 	$("#submit-button").on("click", function() {
+		medTestValidation();
+	})
+	
+	var medTestValidation = function(){
+		var $email = $("#email");
+		var $firstName = $("#first-name");
+		var $lastName = $("#last-name");
+		var $phoneNumber = $("#phone-number");
+		var $address = $("#address");
+		var $dna = $("#dna");
+		var $symptom = $("#address");
 
+		var emailStatus = $email[0].classList[2];
+		var phoneNumberStatus = $phoneNumber[0].classList[2];
+		var firstNameStatus = $firstName[0].classList[2];
+		var lastNameStatus = $lastName[0].classList[2];
+		var addressStatus = $address[0].classList[2];
+		var dnaStatus = $dna[0].classList[2];
+		var symptomStatus = $symptom[0].classList[2];
+
+		if (emailStatus == "is-valid" && firstNameStatus == "is-valid" && lastNameStatus == "is-valid" && addressStatus == "is-valid" && phoneNumberStatus == "is-valid"
+			&& dnaStatus == "is-valid" && symptomStatus == "is-valid") {
+			proceedMedTest();
+		}
+	}
+	
+	var proceedMedTest = function(){
 		var firstName = $("#first-name").val();
 		var lastName = $("#last-name").val();
 		var patientName = firstName + " " + lastName;
@@ -211,7 +237,7 @@ $(function() {
 			$testList.empty();
 			getAllUserTests();
 		});
-	})
+	}
 
 	var getUsername = function() {
 		$.ajax({
@@ -305,6 +331,95 @@ $(function() {
 
 	$('.modal.draggable>.modal-dialog>.modal-content>.modal-header').css(
 			'cursor', 'move');
+	
+	$("#email").on('change', function () {
+		var $email = $("#email");
+		var email = $email.val();
+		var validation = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+		if (validation.test(email)) {
+			$email[0].classList.remove('is-invalid');
+			$email[0].classList.add('is-valid');
+
+		} else {
+			$email[0].classList.remove('is-valid');
+			$email[0].classList.add('is-invalid');
+		}
+	})
+	
+	$("#first-name").on('change', function () {
+		var $firstName = $("#first-name");
+		var firstName = $firstName.val();
+		if (firstName.length > 0 && firstName != 'name') {
+			$firstName[0].classList.remove('is-invalid');
+			$firstName[0].classList.add('is-valid');
+		} else {
+			$firstName[0].classList.remove('is-valid');
+			$firstName[0].classList.add('is-invalid');
+		}
+	})
+	
+	$("#last-name").on('change', function () {
+		var $lastName = $("#last-name");
+		var lastName = $lastName.val();
+		if (lastName.length > 0 && lastName != 'name') {
+			$lastName[0].classList.remove('is-invalid');
+			$lastName[0].classList.add('is-valid');
+		} else {
+			$lastName[0].classList.remove('is-valid');
+			$lastName[0].classList.add('is-invalid');
+		}
+	})
+	
+	$("#phone-number").on('change', function () {
+		var $countryCode = $("#country-code");
+		var $phoneNumber = $("#phone-number");
+		var fullNumber = $countryCode.val() + $phoneNumber.val();
+		var validation = /^\d{12}$/;
+		if (validation.test(fullNumber)) {
+			$phoneNumber[0].classList.remove('is-invalid');
+			$phoneNumber[0].classList.add('is-valid');
+		} else {
+			$phoneNumber[0].classList.remove('is-valid');
+			$phoneNumber[0].classList.add('is-invalid');
+		}
+	})
+	
+	$("#address").on('change', function () {
+		var $address = $("#address");
+		var address = $address.val();
+		if (address.length > 3 && address != 'address') {
+			$address[0].classList.remove('is-invalid');
+			$address[0].classList.add('is-valid');
+		} else {
+			$address[0].classList.remove('is-valid');
+			$address[0].classList.add('is-invalid');	
+		}
+	})
+	
+	$("#dna").on('change', function () {
+		var $dna = $("#dna");
+		var dna = $dna.val();
+		var validation = /^[ATGC]+$/i
+		if (validation.test(dna)) {
+			$dna[0].classList.remove('is-invalid');
+			$dna[0].classList.add('is-valid');
+		} else {
+			$dna[0].classList.remove('is-valid');
+			$dna[0].classList.add('is-invalid');	
+		}
+	})
+	
+	$("#symptom").on('change', function () {
+		var $symptom = $("#symptom");
+		var symptom = $symptom.val();
+		if (symptom.length > 3 && symptom != 'symptom') {
+			$symptom[0].classList.remove('is-invalid');
+			$symptom[0].classList.add('is-valid');
+		} else {
+			$symptom[0].classList.remove('is-valid');
+			$symptom[0].classList.add('is-invalid');	
+		}
+	})
 
 	getUsername();
 	getAllUserTests();

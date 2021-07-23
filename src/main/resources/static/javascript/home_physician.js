@@ -184,7 +184,10 @@ $(function() {
 				symptom : symptom
 			}
 		}).done(function(response) {
-			console.log(response);
+			$("#do-test-modal").modal("hide");
+			var $testList = $("#test-list");
+			$testList.empty();
+			getAllUserTests();
 		});
 	})
 

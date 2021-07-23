@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -109,16 +110,15 @@ public class MedTestRest {
 		if (existingPatient == null) {
 			Patient newPatient = new Patient(email, dna, patientName, phoneNumber, dateOfBirth, gender, address);
 			patientRepository.saveAndFlush(newPatient);
-			double testResult = 1;
-			/* getGeneticDisorderProbability(String dna); */
+			double testResult = getGeneticDisorderProbability(dna);
 			MedTest newTest = new MedTest(testDate, testResult, symptom);
-			newTest.setPatient(patientRepository.findByPatientNameAndEmailAndPhoneNumber(patientName, email, phoneNumber));
+			newTest.setPatient(
+					patientRepository.findByPatientNameAndEmailAndPhoneNumber(patientName, email, phoneNumber));
 			testRepository.saveAndFlush(newTest);
 			return newTest;
 
 		} else {
-			double testResult = 1;
-			/* getGeneticDisorderProbability(String dna); */
+			double testResult = getGeneticDisorderProbability(dna);
 			MedTest newTest = new MedTest(testDate, testResult, symptom);
 			newTest.setPatient(existingPatient);
 			testRepository.saveAndFlush(newTest);
@@ -133,9 +133,90 @@ public class MedTestRest {
 	 * @param dna – human dna to be checked
 	 * @return a number between 0 and 1 with the probability for disorder
 	 */
-	double getGeneticDisorderProbability(String dna) {
-		return 0;
-		// to be implemented...
+	public double getGeneticDisorderProbability(String dna) {
+
+		/**
+		 * Reverse the DNA sequence into a new String
+		 */
+		String reversedDna = new StringBuilder(dna).reverse().toString();
+
+		/**
+		 * Transform the DNA String into a char array
+		 */
+		char[] dnaArray = new char[dna.length()];
+		for (int i = 0; i < dna.length(); i++) {
+			dnaArray[i] = dna.charAt(i);
+		}
+
+		/**
+		 * Transform the reversed DNA String into a char array
+		 */
+		char[] reversedDnaArray = new char[reversedDna.length()];
+		for (int i = 0; i < reversedDna.length(); i++) {
+			reversedDnaArray[i] = reversedDna.charAt(i);
+		}
+
+		/**
+		 * Make a new ArrayList into which to save characters from the reversed DNA,
+		 * which match the prefix of the DNA. The method compares all the characters
+		 * from the reversed array to the normal array's first character until there is
+		 * a match. Then the matched character from the reversed array is saved into the
+		 * array list. The matching and saving continues over from the next character in
+		 * the reversed sequence, but now it compares to the second DNA character and so
+		 * on.
+		 */
+		ArrayList<Character> prefixArrayList = new ArrayList<Character>();
+
+		int j = 0;
+
+		for (int i = 0; i < reversedDnaArray.length; i++) {
+			char currentChar = reversedDnaArray[i];
+			if (currentChar == dnaArray[j]) {
+				prefixArrayList.add(currentChar);
+				j++;
+			}
+		}
+
+		/**
+		 * Turn the array list into a String
+		 */
+		String prefixArrayListString = getPrefixArrayListString(prefixArrayList);
+		prefixArrayListString = prefixArrayListString.substring(4);
+
+		/**
+		 * Compare the String to the DNA String and cut off characters from the end
+		 * until a genuine prefix match
+		 */
+		for(int i = 0; i < 255; i++) {
+			if(!reversedDna.contains(prefixArrayListString)) {
+				prefixArrayListString = StringUtils.chop(prefixArrayListString);
+			} else {
+				break;
+			}
+		}
+
+		/**
+		 * Compare the DNA and matching prefix lengths to get the disorder probability.
+		 * Prefix length is set to 0 in case it was 1, as a single match is not enough.
+		 */
+		double dnaLength = dna.length();
+		double prefixLength = prefixArrayListString.length();
+		if (prefixArrayListString.length() == 1) {
+			prefixLength = 0;
+		}
+		double geneticDisorderProbability = prefixLength / dnaLength;
+
+		return geneticDisorderProbability;
+	}
+
+	private String getPrefixArrayListString(ArrayList<Character> prefixArrayList) {
+		String prefixArrayListString = null;
+		for (int i = 0; i < prefixArrayList.size(); i++) {
+			char currentChar = prefixArrayList.get(i);
+			prefixArrayListString = prefixArrayListString + currentChar;
+		}
+		return prefixArrayListString;
+
 	}
 
 }

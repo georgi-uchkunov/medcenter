@@ -71,7 +71,7 @@ public class DataGenerator {
 	}
 
 	public void loadPatients() {
-		Patient examplePatientA = new Patient("test1@test.com", "ATGCCGTA", "Alice Smith", "088 1234567",
+		Patient examplePatientA = new Patient("test1@test.com", "ATGCGGTATC", "Alice Smith", "35988 1234567",
 				LocalDate.parse("1983-11-15"), "female", "Main Str 17");
 		Patient examplePatientB = new Patient("test2@test.com", "GTCAGTTA", "Bob Jones", "088 7654321",
 				LocalDate.parse("1992-08-07"), "male", "Second Str 89");
@@ -83,7 +83,7 @@ public class DataGenerator {
 	}
 
 	public void loadMedTests() {
-		MedTest exampleTestOne = new MedTest(LocalDate.of(2021, 06, 21), 1, "Blurred vision");
+		MedTest exampleTestOne = new MedTest(LocalDate.of(2021, 06, 21), 0.3, "Blurred vision");
 		exampleTestOne.setPatient(patientRepository.findByPatientNameAndEmail("Alice Smith", "test1@test.com"));
 		MedTest exampleTestTwo = new MedTest(LocalDate.of(2021, 07, 01), 1, "Loss of hearing");
 		exampleTestTwo.setPatient(patientRepository.findByPatientNameAndEmail("Alice Smith", "test1@test.com"));

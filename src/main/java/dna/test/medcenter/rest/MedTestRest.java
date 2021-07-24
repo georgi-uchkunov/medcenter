@@ -20,10 +20,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dna.test.medcenter.models.MedTest;
 import dna.test.medcenter.models.Patient;
+import dna.test.medcenter.models.Role;
 import dna.test.medcenter.models.User;
 import dna.test.medcenter.repos.PatientRepository;
+import dna.test.medcenter.repos.RoleRepository;
 import dna.test.medcenter.repos.TestRepository;
+import dna.test.medcenter.repos.UserRepository;
 
+/**
+ * RestController, which uses functionalities from the {@link TestRepository}
+ * and {@link PatientRepository} related to their respective entities. Receives
+ * AJAX requests from the client, directed based on GetMapping and PostMapping.
+ * 
+ * Handles creating medical tests, redoing them, returning all medical tests or
+ * a specific one based on Id, returning the tests only for a specific patient
+ * and returning tests based on searching for patient names and/or phone numbers
+ */
 @RestController
 public class MedTestRest {
 
@@ -36,11 +48,23 @@ public class MedTestRest {
 		this.patientRepository = patientRepository;
 	}
 
+	/**
+	 * Returns all {@link MedTest}
+	 * 
+	 * @param pageable
+	 * @return all DNA tests
+	 */
 	@GetMapping("/getAllMedTests")
 	public Page<MedTest> getAllMedTests(Pageable pageable) {
 		return testRepository.findAll(pageable);
 	}
 
+	/**
+	 * Returns a specific {@link MedTest} based on Id
+	 * 
+	 * @param id
+	 * @return the DNA test matching the id
+	 */
 	@GetMapping(value = "/getSelectedMedTestById")
 	public MedTest getSelectedMedTestById(@RequestParam(name = "id") int id) {
 		List<MedTest> medTests = testRepository.findAll();
@@ -54,6 +78,13 @@ public class MedTestRest {
 		return null;
 	}
 
+	/**
+	 * Returns all {@link MedTest} relating to a specific {@link User} with the
+	 * "PATIENT" {@link Role} who is currently in session
+	 * 
+	 * @param session
+	 * @return all DNA tests of the current user logged in as patient
+	 */
 	@GetMapping("/getPatientMedTests")
 	public ResponseEntity<List<MedTest>> getPatientMedTests(HttpSession session) {
 		final List<MedTest> medTests = new ArrayList<>();
@@ -77,6 +108,13 @@ public class MedTestRest {
 
 	}
 
+	/**
+	 * Returns multiple specific {@link MedTest} where the search term fully or
+	 * partially matches their patient names or phone numbers
+	 * 
+	 * @param searchTerm
+	 * @return specific DNA tests based on search terms
+	 */
 	@GetMapping("/getSpecificTests")
 	public ResponseEntity<List<MedTest>> getSpecificTests(String searchTerm) {
 		final List<MedTest> specificTests = new ArrayList<>();
@@ -98,6 +136,15 @@ public class MedTestRest {
 		return ResponseEntity.ok(specificTests);
 	}
 
+	/**
+	 * Creates a new {@link MedTest} and assigns it to a specific {@link Patient}
+	 * based on matching parameters. If such a {@link Patient} does not exist yet,
+	 * they are created.
+	 * 
+	 * @param email, patientName, address, gender, phoneNumber, dateOfBirthString,
+	 *               dna, symptom
+	 * @return a new DNA test
+	 */
 	@PostMapping("/performDNATest")
 	public MedTest performDNATest(@RequestParam(name = "email") String email,
 			@RequestParam(name = "patientName") String patientName, @RequestParam(name = "address") String address,
@@ -210,6 +257,13 @@ public class MedTestRest {
 		return geneticDisorderProbability;
 	}
 
+	/**
+	 * Makes a single string out of the matching symbols in the proper and reversed
+	 * dna sequences
+	 * 
+	 * @param prefixArrayList - the array list of matching symbols
+	 * @return a string of the matching symbols
+	 */
 	private String getPrefixArrayListString(ArrayList<Character> prefixArrayList) {
 		String prefixArrayListString = null;
 		for (int i = 0; i < prefixArrayList.size(); i++) {
@@ -220,11 +274,18 @@ public class MedTestRest {
 
 	}
 
+	/**
+	 * Redoes the calculation of a probable genetic disorder, updates the test date
+	 * and edits an existing {@link MedTest}
+	 * 
+	 * @param testId
+	 * @return a test with (possibly) updated result and an updated test date
+	 */
 	@PostMapping(value = "/redoDNATest")
 	public MedTest redoDnaTest(@RequestParam(name = "testId") int testId) {
 		Optional<MedTest> testForRedo = testRepository.findById(testId);
-		
-		if(testForRedo.isPresent()) {
+
+		if (testForRedo.isPresent()) {
 			MedTest requiredMedTest = testForRedo.get();
 			String requiredMedTestDna = requiredMedTest.getPatient().getDna();
 			double newResult = getGeneticDisorderProbability(requiredMedTestDna);
@@ -233,7 +294,6 @@ public class MedTestRest {
 			testRepository.saveAndFlush(requiredMedTest);
 		}
 		return null;
-		
 
 	}
 

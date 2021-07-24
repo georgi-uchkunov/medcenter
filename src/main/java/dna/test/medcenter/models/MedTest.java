@@ -10,8 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-
-
+/**
+ * Represents the DNA tests performed on the {@link Patient} Includes an
+ * auto-generated Id, the date on which the test is performed, the patient's
+ * symptom and the test's result, which is represented as a value between 0 and
+ * 1 Has a many to one relation with {@link Patient}
+ */
 @Entity
 public class MedTest implements Serializable {
 
@@ -23,14 +27,14 @@ public class MedTest implements Serializable {
 	private LocalDate testDate;
 	private double testResult;
 	private String symptom;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Patient patient;
-	
+
 	public MedTest() {
-		
+
 	}
-	
+
 	public MedTest(LocalDate testDate, double testResult, String symptom) {
 		super();
 		this.testDate = testDate;
@@ -77,5 +81,5 @@ public class MedTest implements Serializable {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-		
+
 }

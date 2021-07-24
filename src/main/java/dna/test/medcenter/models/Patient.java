@@ -17,6 +17,14 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * Represents the patient on which a {@link MedTest} is performed. Separate from
+ * the "PATIENT" {@link Role} Creating a new Patient does not create a new
+ * {@link User} and vice versa Includes an auto-generated Id, email (which needs
+ * to be unique), dna (which needs to be unique), date of birth, name, phone,
+ * gender and address Connected to {@link MedTest} in a one to many relation
+ * Does not return its list of tests in Json responses to prevent recursion
+ */
 @Entity
 @JsonIgnoreProperties("medicalTests")
 public class Patient implements Serializable {
@@ -159,5 +167,5 @@ public class Patient implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

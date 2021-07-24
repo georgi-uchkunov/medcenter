@@ -14,9 +14,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-
+/**
+ * Represents the users of the site. Every new registered user is assigned the
+ * default "PATIENT" {@link Role} Only one auto-generated user has the
+ * higher-privileges "MED_PHYS" {@link Patient} Includes an auto-generated Id,
+ * email (has to be unique), username (has to be unique), password, first name,
+ * last name, date of birth, gender and address Has a many to many relation with
+ * {@link Role}, which are stored in a Set to prevent doubling
+ */
 @Entity
-@Table(name="\"User\"")
+@Table(name = "\"User\"")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 2L;
@@ -35,7 +42,7 @@ public class User implements Serializable {
 	private LocalDate dateOfBirth;
 	private String gender;
 	private String address;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Role> roles;
 
@@ -127,7 +134,7 @@ public class User implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	public void addRole(Role role) {
 		if (roles == null) {
 			roles = new HashSet<Role>();
@@ -142,7 +149,7 @@ public class User implements Serializable {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

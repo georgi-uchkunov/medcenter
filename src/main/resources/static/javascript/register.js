@@ -133,7 +133,7 @@ $(function() {
 	$("#first-name").on('change', function () {
 		var $firstName = $("#first-name");
 		var firstName = $firstName.val();
-		if (firstName.length > 0 && firstName != 'name') {
+		if (firstName.length > 2 && firstName != 'name') {
 			$firstName[0].classList.remove('is-invalid');
 			$firstName[0].classList.add('is-valid');
 		} else {
@@ -145,7 +145,7 @@ $(function() {
 	$("#last-name").on('change', function () {
 		var $lastName = $("#last-name");
 		var lastName = $lastName.val();
-		if (lastName.length > 0 && lastName != 'name') {
+		if (lastName.length > 2 && lastName != 'name') {
 			$lastName[0].classList.remove('is-invalid');
 			$lastName[0].classList.add('is-valid');
 		} else {

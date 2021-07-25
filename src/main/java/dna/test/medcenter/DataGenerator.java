@@ -16,6 +16,12 @@ import dna.test.medcenter.repos.RoleRepository;
 import dna.test.medcenter.repos.TestRepository;
 import dna.test.medcenter.repos.UserRepository;
 
+/**
+ * Generates example data for all entities: {@link Role}, {@link User},
+ * {@link Patient} and {@link MedTest} Loads on startup and its key method runs
+ * only in case the database has no {@link User} table yet - meaning in most
+ * cases where the app is ran for the first time and the database is empty
+ */
 @Component
 public class DataGenerator {
 	private RoleRepository roleRepository;
@@ -32,6 +38,10 @@ public class DataGenerator {
 		this.testRepository = testRepository;
 	}
 
+	/**
+	 * Key method, which handles when to generate the example data and combines the
+	 * methods specialized for the different entities
+	 */
 	@PostConstruct
 	public void loadExampleInfo() {
 		if (userRepository.count() == 0) {
@@ -42,6 +52,11 @@ public class DataGenerator {
 		}
 	}
 
+	/**
+	 * Generates the "MED_PHYS" {@link Role} and attaches it to a {@link User}
+	 * slated to have higher access and privileges The user has username and
+	 * password: "doctor01"
+	 */
 	public void loadMedicalPhysician() {
 		User medPhysician = new User("doctor01@test.com", "doctor01", "doctor01", "John", "Smith",
 				LocalDate.of(1987, 07, 17), "Male", "Main Street 81");
@@ -51,6 +66,10 @@ public class DataGenerator {
 		userRepository.save(medPhysician);
 	}
 
+	/**
+	 * Generates the "PATIENT" {@link Role} and attaches it to three example
+	 * {@link User} with generic access and privileges
+	 */
 	public void loadUsersWithPatientRole() {
 		User examplePatientOne = new User("test1@test.com", "AliceS", "test1", "Alice", "Smith",
 				LocalDate.parse("1983-11-15"), "female", "Main Str 17");
@@ -70,18 +89,28 @@ public class DataGenerator {
 
 	}
 
+	/**
+	 * Generates three {@link Patient} matching to the three example {@link User}
+	 * All three have DNAs matching the ones in the task example
+	 */
 	public void loadPatients() {
 		Patient examplePatientA = new Patient("test1@test.com", "ATGCGGTATC", "Alice Smith", "359881234567",
 				LocalDate.parse("1983-11-15"), "female", "Main Str 17");
-		Patient examplePatientB = new Patient("test2@test.com", "GTCAGTTA", "Bob Jones", "359881234568",
+		Patient examplePatientB = new Patient("test2@test.com", "ATGTA", "Bob Jones", "359881234568",
 				LocalDate.parse("1992-08-07"), "male", "Second Str 89");
-		Patient examplePatientC = new Patient("test3@test.com", "ACTGACTGA", "Clark North", "359881234569",
+		Patient examplePatientC = new Patient("test3@test.com", "ATGCGTC", "Clark North", "359881234569",
 				LocalDate.parse("1998-05-16"), "male", "Silver Str 117");
 		patientRepository.save(examplePatientA);
 		patientRepository.save(examplePatientB);
 		patientRepository.save(examplePatientC);
 	}
 
+	/**
+	 * Generates two {@link MedTest} for each of the three example {@link Patient}
+	 * All {@link MedTest} have a result value of 10 so they can stand out and be
+	 * used as a quick example of the
+	 * {@link dna.test.medcenter.rest#getGeneticDisorderProbability()}
+	 */
 	public void loadMedTests() {
 		MedTest exampleTestOne = new MedTest(LocalDate.of(2021, 06, 21), 10, "Blurred vision");
 		exampleTestOne.setPatient(patientRepository.findByPatientNameAndEmail("Alice Smith", "test1@test.com"));

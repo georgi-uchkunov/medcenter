@@ -20,6 +20,9 @@ public class MedCenterMedPhysHomePage{
 	@FindBy(id = "male-radio")
 	WebElement maleRadio;
 	
+	@FindBy(id = "female-radio")
+	WebElement femaleRadio;
+	
 	@FindBy(id = "dna")
 	WebElement dnaInput;
 	
@@ -91,6 +94,10 @@ public class MedCenterMedPhysHomePage{
 	
 	public void clickMaleRadio() {
 		maleRadio.click();
+	}
+	
+	public void clickFemaleRadio() {
+		femaleRadio.click();
 	}
 	
 	public void useSearchForm(final String search) {

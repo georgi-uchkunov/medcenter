@@ -71,11 +71,11 @@ public class DataGenerator {
 	}
 
 	public void loadPatients() {
-		Patient examplePatientA = new Patient("test1@test.com", "ATGCGGTATC", "Alice Smith", "35988 1234567",
+		Patient examplePatientA = new Patient("test1@test.com", "ATGCGGTATC", "Alice Smith", "359881234567",
 				LocalDate.parse("1983-11-15"), "female", "Main Str 17");
-		Patient examplePatientB = new Patient("test2@test.com", "GTCAGTTA", "Bob Jones", "35988 1234568",
+		Patient examplePatientB = new Patient("test2@test.com", "GTCAGTTA", "Bob Jones", "359881234568",
 				LocalDate.parse("1992-08-07"), "male", "Second Str 89");
-		Patient examplePatientC = new Patient("test3@test.com", "ACTGACTGA", "Clark North", "35988 1234569",
+		Patient examplePatientC = new Patient("test3@test.com", "ACTGACTGA", "Clark North", "359881234569",
 				LocalDate.parse("1998-05-16"), "male", "Silver Str 117");
 		patientRepository.save(examplePatientA);
 		patientRepository.save(examplePatientB);

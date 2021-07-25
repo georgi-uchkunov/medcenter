@@ -18,6 +18,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class MedCenterMedPhysHomePageSeleniumTest {
 
@@ -298,6 +299,78 @@ public class MedCenterMedPhysHomePageSeleniumTest {
 				assertTrue(nameCheck);
 				
 			}
+		}
+	}
+	
+	@Test
+	public void testDoesPerformingNewDnaTestWorkWithExistingPatient() throws InterruptedException {
+		medPhysHomePage.clickDnaTestButton();
+		medPhysHomePage.useFirstNameForm("Alice");
+		medPhysHomePage.useLastNameForm("Smith");
+		medPhysHomePage.clickFirstNextButton();
+		Thread.sleep(4000);
+		medPhysHomePage.useEmailForm("test1@test.com");
+		Select countryCodeDropdown = new Select(driver.findElement(By.id("country-code")));
+		countryCodeDropdown.selectByValue("359");
+		medPhysHomePage.usePhoneNumberForm("881234567");
+		medPhysHomePage.clickSecondNextButton();
+		Thread.sleep(4000);
+		Select dayDropdown = new Select(driver.findElement(By.id("day")));
+		dayDropdown.selectByValue("15");
+		Select monthDropdown = new Select(driver.findElement(By.id("month")));
+		monthDropdown.selectByValue("11");
+		Select yearDropdown = new Select(driver.findElement(By.id("year")));
+		yearDropdown.selectByValue("1983");
+		medPhysHomePage.clickFemaleRadio();
+		medPhysHomePage.useAddressForm("Main Street 17");
+		medPhysHomePage.clickThirdNextButton();
+		Thread.sleep(4000);
+		medPhysHomePage.useDnaForm("ATGCGGTATC");
+		medPhysHomePage.useSymptomForm("Selenium");
+		medPhysHomePage.clickSubmitButton();
+		Thread.sleep(4000);
+		List<WebElement> tests = driver.findElements(By.className("list-group-item"));
+		String patientName = tests.get(tests.size() - 1).findElement(By.className("patient-name")).getText();
+		String patientSymptom = tests.get(tests.size() - 1).findElement(By.className("symptom")).getText();
+		if(patientName.contentEquals("Alice Smith") && patientSymptom.contentEquals("Selenium")) {
+			boolean nameAndSymptomCheck = true;
+			assertTrue(nameAndSymptomCheck);
+		}
+	}
+	
+	@Test
+	public void testDoesPerformingNewDnaTestWorkWithNonExistingPatient() throws InterruptedException {
+		medPhysHomePage.clickDnaTestButton();
+		medPhysHomePage.useFirstNameForm("John");
+		medPhysHomePage.useLastNameForm("Doe");
+		medPhysHomePage.clickFirstNextButton();
+		Thread.sleep(4000);
+		medPhysHomePage.useEmailForm("john@test.com");
+		Select countryCodeDropdown = new Select(driver.findElement(By.id("country-code")));
+		countryCodeDropdown.selectByValue("359");
+		medPhysHomePage.usePhoneNumberForm("881234777");
+		medPhysHomePage.clickSecondNextButton();
+		Thread.sleep(4000);
+		Select dayDropdown = new Select(driver.findElement(By.id("day")));
+		dayDropdown.selectByValue("15");
+		Select monthDropdown = new Select(driver.findElement(By.id("month")));
+		monthDropdown.selectByValue("11");
+		Select yearDropdown = new Select(driver.findElement(By.id("year")));
+		yearDropdown.selectByValue("1987");
+		medPhysHomePage.clickMaleRadio();
+		medPhysHomePage.useAddressForm("Main Street 21");
+		medPhysHomePage.clickThirdNextButton();
+		Thread.sleep(4000);
+		medPhysHomePage.useDnaForm("ATGCGCTTATC");
+		medPhysHomePage.useSymptomForm("Selenium 2");
+		medPhysHomePage.clickSubmitButton();
+		Thread.sleep(4000);
+		List<WebElement> tests = driver.findElements(By.className("list-group-item"));
+		String patientName = tests.get(tests.size() - 1).findElement(By.className("patient-name")).getText();
+		String patientSymptom = tests.get(tests.size() - 1).findElement(By.className("symptom")).getText();
+		if(patientName.contentEquals("John Doe") && patientSymptom.contentEquals("Selenium 2")) {
+			boolean nameAndSymptomCheck = true;
+			assertTrue(nameAndSymptomCheck);
 		}
 	}
 

@@ -194,7 +194,7 @@ $(function() {
 		var email = $("#email").val();
 		var countryCode = $("#country-code").val();
 		var phoneNumber = $("#phone-number").val();
-		var patientPhoneNumber = countryCode + " " + phoneNumber;
+		var patientPhoneNumber = countryCode + phoneNumber;
 		var day = $("#day").val();
         var month = $("#month").val();
         var year = $("#year").val();
